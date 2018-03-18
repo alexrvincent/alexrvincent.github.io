@@ -146,7 +146,30 @@ var wHeight = $(window).height();
 $('.header').height(wHeight); 
 }
 
-    function barScroll(){
+function toAlias(value) {
+    if (!value) return '';
+
+    var alias = 'Unavailable';
+    switch (true) {
+        case (value <= 25):
+            alias = 'Familiar';
+            break;
+        case (value <= 65):
+            alias = 'Competent';
+            break;
+        case (value <= 85):
+            alias = 'Proficient';
+            break;
+        case (value <= 100):
+            alias = 'Strong';
+            break;
+        default:
+            break;
+    }
+    return alias;
+}
+
+function barScroll(){
      setTimeout(function(){
 
     $('.progress-bar').each(function() {
@@ -164,12 +187,12 @@ $('.header').height(wHeight);
                 me.css('width', (current_perc)+'%');
             }
 
-            pe.text((current_perc)+'%');
+            //pe.text((current_perc)+'%');
+            pe.text(toAlias(current_perc));
+            pe.width(toAlias(current_perc).length * 8)
 
-        },90);
+        }, 35);
     });
-}, 300);
+    }, 300);
 
- 
-        
-    }
+}
